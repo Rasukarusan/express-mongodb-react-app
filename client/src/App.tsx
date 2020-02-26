@@ -4,15 +4,24 @@ import './App.css';
 
 function App() {
   const [apiResponse, setApiResponse] = useState<String>('');
+  const [dbResponse, setDbResponse] = useState<String>('');
 
   const callAPI = () => {
-    fetch('http://localhost:9000/testAPI').then
-    (res => res.text()).then
-    (res => setApiResponse(res));
+    fetch('http://localhost:9000/testAPI')
+    .then(res => res.text())
+    .then(res => setApiResponse(res));
   };
+
+  const callDB = () => {
+    fetch('http://localhost:9000/testDB')
+      .then(res => res.text())
+      .then(res => setDbResponse(res))
+      .catch(err => err);
+  }
 
   useEffect(() => {
     callAPI();
+    callDB();
   }, []);
 
   return (
@@ -21,6 +30,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p className="App-intro">
           {apiResponse}
+        </p>
+        <p className="App-intro">
+          {dbResponse}
         </p>
       </header>
     </div>
