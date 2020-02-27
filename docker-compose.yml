@@ -4,6 +4,8 @@ services:
         build:
             context: ./client
             dockerfile: ./Dockerfile
+        container_name: express-react-client
+        image: react
         restart: always
         ports:
             - "3000:3000"
@@ -19,16 +21,16 @@ services:
         build:
             context: ./api
             dockerfile: ./Dockerfile
+        container_name: express-react-api
+        image: express
         restart: always
         ports:
             - "9000:9000"
         volumes:
             - ./api:/api
-            - /api/node_modules
         depends_on:
             - mongodb
-        links:
-            - mongodb
+        command: bash -c "/usr/wait-for-it.sh --timeout=0 mongodb:27017 && npm start"
         networks:
             - webappnetwork
 
