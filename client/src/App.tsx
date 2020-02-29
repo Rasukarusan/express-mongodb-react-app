@@ -1,6 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CsvUpload from './CsvUpload/CsvUpload';
 
 function App() {
   const [apiResponse, setApiResponse] = useState<String>('');
@@ -35,6 +36,7 @@ function App() {
           {dbResponse}
         </p>
       </header>
+      <CsvUpload />
     </div>
   );
 }
