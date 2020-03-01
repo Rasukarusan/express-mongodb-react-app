@@ -1,5 +1,4 @@
-import React, { useCallback, useState }  from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState }  from 'react';
 import styled, { css } from 'styled-components'
 import {useDropzone} from 'react-dropzone'
 
@@ -48,14 +47,18 @@ const DropZone = styled.div`
   width: 50vw;
 `;
 
+interface AcceptFile extends File {
+  readonly path: string
+}
+
 function UploadArea() {
   let uploadFiles: File[] = [];
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone()
   const files = acceptedFiles.map((file:File) => {
     uploadFiles.push(file);
     return (
-      <li key={(file as any).path}>
-        {(file as any).path} - {file.size} bytes
+      <li key={(file as AcceptFile).path}>
+        {(file as AcceptFile).path} - {file.size} bytes
       </li>
     );
   });
@@ -90,10 +93,12 @@ function upload(files: File[]) {
 
   const formData = new FormData();
   files.map((file: File) => {
-    formData.append('myFile', file);
+    formData.append('file', file);
   });
 
   fetch('http://localhost:9000/upload', {method: 'POST', body: formData})
+  .then(res => res.json())
+  .catch(error => { console.log(error); })
   .then(res => {
     console.log(res);
   })
