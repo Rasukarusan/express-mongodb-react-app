@@ -49,26 +49,38 @@ const DropZone = styled.div`
 `;
 
 function UploadArea() {
-  const onDrop = useCallback((acceptedFiles : File[]) => {
-    acceptedFiles.map(file => console.log(file));
-  }, [])
-
-  const {getRootProps, getInputProps, isDragActive} = useDropzone(onDrop)
+  const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone()
+  const files = acceptedFiles.map((file:File) => (
+      <li key={(file as any).path}>
+        {(file as any).path} - {file.size} bytes
+      </li>
+    ));
 
   return (
-    <DropZone {...getRootProps()}>
-    <input type="text" name="color" {...getInputProps()} />
-      {
-        isDragActive ? <p>Drop the files here ...</p> :
-          <p>Drag drop some files here, or click to select files</p>
-      }
-    </DropZone>
+    <section className="container">
+      <DropZone {...getRootProps({className: 'dropzone'})}>
+      <input type="file" name="dropzone" {...getInputProps()} />
+        { isDragActive ? 
+          <p>そのままここにファイルをドロップしてください</p> :
+          <p>枠内をクリック<br/>またはファイルをドラッグ＆ドロップしてください</p>
+        }
+      </DropZone>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+      <UploadButton />
+    </section>
   )
+}
+
+function upload() {
+  console.log("updalod start");
 }
 
 function UploadButton() {
   return (
-    <Button primary>実行</Button>
+    <Button primary onClick={upload}>実行</Button>
   );
 }
 
@@ -103,7 +115,6 @@ function CsvUpload() {
     <Container>
       <Title>CSVアップロード</Title>
       <UploadArea />
-      <UploadButton />
       <History />
     </Container>
   );
