@@ -1,4 +1,4 @@
-import React, { useCallback }  from 'react';
+import React, { useCallback, useState }  from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components'
 import {useDropzone} from 'react-dropzone'
@@ -49,12 +49,20 @@ const DropZone = styled.div`
 `;
 
 function UploadArea() {
+  let uploadFiles: File[] = [];
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone()
-  const files = acceptedFiles.map((file:File) => (
+  const files = acceptedFiles.map((file:File) => {
+    uploadFiles.push(file);
+    return (
       <li key={(file as any).path}>
         {(file as any).path} - {file.size} bytes
       </li>
-    ));
+    );
+  });
+
+  function handleClick() {
+    upload(uploadFiles);
+  }
 
   return (
     <section className="container">
@@ -69,19 +77,26 @@ function UploadArea() {
         <h4>Files</h4>
         <ul>{files}</ul>
       </aside>
-      <UploadButton />
+      <Button primary onClick={handleClick}>実行</Button>
     </section>
   )
 }
 
-function upload() {
-  console.log("updalod start");
-}
+function upload(files: File[]) {
+  if (files.length === 0) {
+    console.log('Please Upload File');
+    return ;
+  }
 
-function UploadButton() {
-  return (
-    <Button primary onClick={upload}>実行</Button>
-  );
+  const formData = new FormData();
+  files.map((file: File) => {
+    formData.append('myFile', file);
+  });
+
+  fetch('http://localhost:9000/upload', {method: 'POST', body: formData})
+  .then(res => {
+    console.log(res);
+  })
 }
 
 function History() {
