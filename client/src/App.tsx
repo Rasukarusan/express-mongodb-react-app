@@ -14,7 +14,7 @@ function App() {
   };
 
   const callDB = () => {
-    fetch('http://localhost:9000/upload')
+    fetch('http://localhost:9000/orders')
       .then(res => res.text())
       .then(res => setDbResponse(res))
       .catch(err => err);
