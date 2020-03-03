@@ -6,8 +6,6 @@ const upload = multer({ dest: './uploads/' });
 
 const controller = require('../controllers/orderController');
 router.post('/', upload.array('file'), controller.upload);
-router.get('/', function(req, res, next) {
-   res.send('Upload done!')
-});
+router.get('/', controller.index);
 
 module.exports = router;
