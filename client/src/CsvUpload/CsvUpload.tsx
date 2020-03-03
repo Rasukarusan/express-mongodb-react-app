@@ -96,7 +96,7 @@ function upload(files: File[]) {
     formData.append('file', file);
   });
 
-  fetch('http://localhost:9000/upload', {method: 'POST', body: formData})
+  fetch('http://localhost:9000/orders', {method: 'POST', body: formData})
   .then(res => res.json())
   .catch(error => { console.log(error); })
   .then(res => {

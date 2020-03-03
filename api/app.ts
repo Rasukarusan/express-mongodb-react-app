@@ -9,8 +9,7 @@ import mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const testAPIRouter = require('./routes/testAPI');
-const uploadRouter = require('./routes/upload');
-
+const orderRouter = require('./routes/orders');
 const app = express();
 
 mongoose.connect('mongodb://mongodb:27017/test', {useNewUrlParser: true});
@@ -34,7 +33,7 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/testAPI', testAPIRouter);
-app.use('/upload', uploadRouter)
+app.use('/orders', orderRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req: Request, res: Response, next: NextFunction) {

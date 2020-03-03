@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import mongoose = require('mongoose');
-import Order from '../models/order';
+import Order from '../models/orders';
 
 exports.index = function(req: Request, res: Response) {
   Order.find(function(err, orders) {
@@ -13,7 +13,7 @@ exports.index = function(req: Request, res: Response) {
   res.send('this is orderController index!!');
 }
 
-exports.upload = function(req: Request, res: Response) {
+exports.store = function(req: Request, res: Response) {
   if (!req.files) {
     return;
   }

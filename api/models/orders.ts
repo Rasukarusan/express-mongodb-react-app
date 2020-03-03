@@ -1,8 +1,8 @@
 import mongoose = require('mongoose');
 
 interface IOrderDocument extends mongoose.Document {
-  name: String,
-  age: Number
+  name: string,
+  age: number
 }
 
 const orderSchema = new mongoose.Schema({
