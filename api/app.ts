@@ -5,6 +5,7 @@ import path = require('path');
 import cookieParser = require('cookie-parser');
 import logger = require('morgan');
 import cors = require('cors');
+import mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,6 +14,14 @@ const testDBRouter = require('./routes/testDB');
 const uploadRouter = require('./routes/upload');
 
 const app = express();
+
+mongoose.connect('mongodb://mongodb:27017/test', {useNewUrlParser: true});
+mongoose.connection.on('error', error => {
+  console.log('DB接続エラー: ', error);
+});
+mongoose.connection.once('open', () => {
+  console.log('DB接続OK!!');
+})
 
 // view engine setup
 app.set('views', 'views');
