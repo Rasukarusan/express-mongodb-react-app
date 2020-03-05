@@ -13,6 +13,11 @@ exports.index = function(req: Request, res: Response) {
   res.send('this is orderController index!!');
 }
 
+exports.show = function(req: Request, res: Response) {
+  console.log(req.params.id);
+  res.send('Parameter: ' + req.params.id);
+}
+
 exports.store = function(req: Request, res: Response) {
   if (!req.files) {
     return;
@@ -22,4 +27,9 @@ exports.store = function(req: Request, res: Response) {
     console.log(file);
   });
   res.status(200).json({msg: 'アップロード完了'})
+}
+
+exports.delete = function(req: Request, res: Response) {
+  console.log(req.params.id);
+  res.send('Parameter of Delete: ' + req.params.id);
 }
