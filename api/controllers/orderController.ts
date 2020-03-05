@@ -10,12 +10,12 @@ exports.index = function(req: Request, res: Response) {
       console.log(order.age);
     })
   });
-  res.send('this is orderController index!!');
+  return res.send('this is orderController index!!');
 }
 
 exports.show = function(req: Request, res: Response) {
   console.log(req.params.id);
-  res.send('Parameter: ' + req.params.id);
+  return res.send('Parameter: ' + req.params.id);
 }
 
 exports.store = function(req: Request, res: Response) {
@@ -26,10 +26,10 @@ exports.store = function(req: Request, res: Response) {
   files.map((file: Express.Multer.File) => {
     console.log(file);
   });
-  res.status(200).json({msg: 'アップロード完了'})
+  return res.status(200).json({msg: 'アップロード完了'})
 }
 
 exports.delete = function(req: Request, res: Response) {
   console.log(req.params.id);
-  res.send('Parameter of Delete: ' + req.params.id);
+  return res.send('Parameter of Delete: ' + req.params.id);
 }
