@@ -6,5 +6,5 @@ RUN npm install
 EXPOSE 80
 # mongoDBの起動を待つためのスクリプトを起動。npm startはdocker-compose.ymlに記述
 # https://github.com/vishnubob/wait-for-it
-COPY wait-for-it.sh /usr/wait-for-it.sh
+COPY bin/wait-for-it.sh /usr/wait-for-it.sh
 RUN chmod +x /usr/wait-for-it.sh
