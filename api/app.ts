@@ -8,7 +8,6 @@ import cors = require('cors');
 import mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
-const testAPIRouter = require('./routes/testAPI');
 const orderRouter = require('./routes/orders');
 const app = express();
 
@@ -20,10 +19,6 @@ mongoose.connection.once('open', () => {
   console.log('DB接続OK!!');
 })
 
-// view engine setup
-app.set('views', 'views');
-app.set('view engine', 'jade');
-
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +27,6 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 app.use('/', indexRouter);
-app.use('/testAPI', testAPIRouter);
 app.use('/orders', orderRouter)
 
 // catch 404 and forward to error handler

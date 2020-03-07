@@ -3,7 +3,7 @@ import multer = require('multer');
 
 const router = express.Router();
 const upload = multer({ dest: './uploads/' });
-const controller = require('../controllers/orderController');
+const controller = require('../src/controllers/orderController');
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
