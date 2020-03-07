@@ -6,5 +6,12 @@
     "allowJs": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "files": [
+    "app.ts"
+  ],
+  "include": [
+    "src/**/*",
+    "routes/*"
+  ]
 }
