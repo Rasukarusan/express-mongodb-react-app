@@ -29,7 +29,7 @@ services:
             - ./api:/api
         depends_on:
             - mongodb
-        command: bash -c "/usr/wait-for-it.sh --timeout=0 mongodb:27017 && npm start"
+        command: bash -c "/usr/wait-for-it.sh --timeout=0 mongodb:27017 && npm run watch"
         networks:
             - webappnetwork
 
