@@ -8,6 +8,7 @@ const controller = require('../src/controllers/orderController');
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', upload.array('file'), controller.store);
-router.delete('/:id', controller.delete);
+router.patch('/:id', controller.update)
+router.delete('/:id', controller.destroy);
 
 module.exports = router;
