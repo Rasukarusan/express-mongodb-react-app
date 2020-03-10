@@ -5,19 +5,11 @@ import path = require('path');
 import cookieParser = require('cookie-parser');
 import logger = require('morgan');
 import cors = require('cors');
-import mongoose = require('mongoose');
+import './config/database';
 
 const indexRouter = require('./routes/index');
 const orderRouter = require('./routes/orders');
 const app = express();
-
-mongoose.connect('mongodb://mongodb:27017/test', {useNewUrlParser: true});
-mongoose.connection.on('error', error => {
-  console.log('DB接続エラー: ', error);
-});
-mongoose.connection.once('open', () => {
-  console.log('DB接続OK!!');
-})
 
 app.use(cors());
 app.use(logger('dev'));
