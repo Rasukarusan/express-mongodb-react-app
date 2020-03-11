@@ -8,10 +8,13 @@
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "app.ts"
+    "src/app.ts"
   ],
   "include": [
-    "src/**/*",
-    "routes/*"
+    "src/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "src/__tests__"
   ]
 }
