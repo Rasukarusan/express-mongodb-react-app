@@ -5,6 +5,7 @@ import path = require('path');
 import cookieParser = require('cookie-parser');
 import logger = require('morgan');
 import cors = require('cors');
+import './config';
 import './config/database';
 
 const indexRouter = require('./routes/index');
