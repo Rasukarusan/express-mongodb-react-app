@@ -6,7 +6,7 @@ import cookieParser = require('cookie-parser');
 import logger = require('morgan');
 import cors = require('cors');
 import './config';
-import './config/database';
+import './database/connection';
 
 const indexRouter = require('./routes/index');
 const orderRouter = require('./routes/orders');
