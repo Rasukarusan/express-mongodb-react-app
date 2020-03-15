@@ -90,7 +90,7 @@ function upload(files: File[]) {
 
   const formData = new FormData();
   files.map((file: File) => {
-    formData.append('file', file);
+    return formData.append('file', file);
   });
 
   fetch('http://localhost:9000/orders', {method: 'POST', body: formData})
