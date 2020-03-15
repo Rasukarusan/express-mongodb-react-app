@@ -12,6 +12,8 @@ const indexRouter = require('./routes/index');
 const orderRouter = require('./routes/orders');
 const app = express();
 
+app.set('view engine', 'jade');
+
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
