@@ -3,15 +3,14 @@ import styled, { css } from 'styled-components'
 import {useDropzone} from 'react-dropzone'
 
 const Container = styled.div`
-  // text-align: center;
+  color: black;
   background: #ffffff;
   width: 100vw;
   height:100vh;
 `;
 
 const Title = styled.h1`
-  font-size: 2.5em;
-  // text-align: center;
+  font-size: 1.5em;
   color: palevioletred;
   padding-top: 1em;
 `;
@@ -23,9 +22,7 @@ const Button = styled.button`
   color: palevioletred;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
-  font-size: 1.5em;
-  width: 5vw;
-  height: 2vw;
+  font-size: 1.0em;
 
   &:disabled {
     background: gray;
@@ -42,7 +39,7 @@ const DropZone = styled.div`
   border-radius: 3px;
   border: 2px solid palevioletred;
   color: palevioletred;
-  font-size: 2.5em;
+  font-size: 1.0em;
   height: 30vh;
   width: 50vw;
 `;
