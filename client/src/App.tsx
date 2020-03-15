@@ -1,31 +1,22 @@
 import React, { useState, useEffect }  from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './NavBar';
 import CsvUpload from './CsvUpload/CsvUpload';
+import OrderIndex from './Order/OrderIndex';
 
 function App() {
-  const [apiResponse, setApiResponse] = useState<String>('');
-
-  const callAPI = () => {
-    fetch('http://localhost:9000/orders')
-      .then(res => res.text())
-      .then(res => setApiResponse(res))
-      .catch(err => err);
-  }
-
-  useEffect(() => {
-    callAPI();
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p className="App-intro">
-          {apiResponse}
-        </p>
+        <Router>
+          <Navbar />
+          <Route path='/CsvUpload' component={CsvUpload} />
+          <Route path='/OrderIndex' component={OrderIndex} />
+        </Router>
       </header>
-      <CsvUpload />
     </div>
   );
 }
