@@ -7,14 +7,10 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "src/app.ts"
-  ],
   "include": [
     "src/**/*"
   ],
   "exclude": [
-      "node_modules",
-      "src/__tests__"
+      "node_modules"
   ]
 }
