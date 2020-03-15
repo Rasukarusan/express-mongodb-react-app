@@ -1,5 +1,13 @@
 import React, { useState, useEffect }  from 'react';
-import { Pane, Heading, Table } from 'evergreen-ui';
+import { 
+  Pane,
+  Heading,
+  Table,
+  Popover,
+  Position,
+  Menu,
+  TextDropdownButton
+} from 'evergreen-ui';
 import axios from 'axios';
 import { filter } from 'fuzzaldrin-plus'
 
@@ -9,9 +17,14 @@ interface IOrder {
   age: number
 }
 
+function makeUpperFirstChar(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
 function List() {
   const [apiResponse, setApiResponse] = useState<IOrder[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [dropDownValue, setDropDownValue] = useState<string>('age');
 
   const getOrders = () => {
     axios.get<IOrder[]>('http://localhost:9000/orders')
@@ -38,20 +51,46 @@ function List() {
       return (
         <Table.Row key={order._id}>
           <Table.TextCell>{ order.name }</Table.TextCell>
-          <Table.TextCell isNumber>{ order.age }</Table.TextCell>
+          <Table.TextCell isNumber>{ order[dropDownValue] }</Table.TextCell>
         </Table.Row>
       );
+  }
+
+  const renderValueHeaderCell = () => {
+    return (
+      <Table.TextHeaderCell>
+        <Popover position={Position.BOTTOM_LEFT} content={({ close }) => (
+          <Menu>
+            <Menu.OptionsGroup
+              title="Show"
+              options={[
+                { label: 'Age', value: 'age' },
+                { label: 'Name', value: 'name' },
+                { label: 'Id', value: '_id' },
+              ]}
+              selected={ dropDownValue }
+              onChange={value => {
+                setDropDownValue(value);
+                close()
+              }}
+            />
+          </Menu>
+        )}
+        >
+          <TextDropdownButton icon={ 'caret-down' } >
+            {makeUpperFirstChar(dropDownValue)}
+          </TextDropdownButton>
+        </Popover>
+      </Table.TextHeaderCell>
+    )
   }
 
   return(
     <div>
       <Table>
         <Table.Head>
-          <Table.SearchHeaderCell
-            onChange={ value => setSearchQuery(value) }
-            value={ searchQuery }
-          />
-          <Table.TextHeaderCell>age</Table.TextHeaderCell>
+          <Table.SearchHeaderCell onChange={ value => setSearchQuery(value) } value={ searchQuery } />
+          { renderValueHeaderCell() }
         </Table.Head>
         <Table.VirtualBody height={320}>
           { filterTable(apiResponse).map((order) => renderRow(order)) }
