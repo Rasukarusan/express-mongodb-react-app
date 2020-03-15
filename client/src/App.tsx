@@ -11,12 +11,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+      </header>
         <Router>
           <Navbar />
           <Route path='/CsvUpload' component={CsvUpload} />
           <Route path='/OrderIndex' component={OrderIndex} />
         </Router>
-      </header>
     </div>
   );
 }
