@@ -25,15 +25,6 @@ function List() {
     getOrders();
   }, []);
 
-  const renderRow = (order: IOrder) => {
-      return (
-        <Table.Row key={order._id}>
-          <Table.TextCell>{ order.name }</Table.TextCell>
-          <Table.TextCell isNumber>{ order.age }</Table.TextCell>
-        </Table.Row>
-      );
-  }
-
   const filterTable = (orders) : IOrder[] =>  {
     const query = searchQuery.trim();
     if (query.length === 0) return orders;
@@ -41,6 +32,15 @@ function List() {
       const result = filter([order.name], query);
       return result.length === 1;
     });
+  }
+
+  const renderRow = (order: IOrder) => {
+      return (
+        <Table.Row key={order._id}>
+          <Table.TextCell>{ order.name }</Table.TextCell>
+          <Table.TextCell isNumber>{ order.age }</Table.TextCell>
+        </Table.Row>
+      );
   }
 
   return(
