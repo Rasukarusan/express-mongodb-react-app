@@ -7,12 +7,12 @@ const Container = styled.div`
   background: #ffffff;
   width: 100vw;
   height:100vh;
+  margin-left: 10px;
 `;
 
 const Title = styled.h1`
   font-size: 1.5em;
   color: palevioletred;
-  padding-top: 1em;
 `;
 
 const Button = styled.button`
