@@ -10,6 +10,14 @@ import {
 } from 'evergreen-ui';
 import axios from 'axios';
 import { filter } from 'fuzzaldrin-plus'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  color: black;
+  width: 100vw;
+  height:100vh;
+  margin-left: 10px;
+`;
 
 interface IOrder {
   _id: string,
@@ -92,7 +100,7 @@ function List() {
           <Table.SearchHeaderCell onChange={ value => setSearchQuery(value) } value={ searchQuery } />
           { renderValueHeaderCell() }
         </Table.Head>
-        <Table.VirtualBody height={320}>
+        <Table.VirtualBody height={200}>
           { filterTable(apiResponse).map((order) => renderRow(order)) }
         </Table.VirtualBody>
       </Table>
@@ -102,10 +110,10 @@ function List() {
 
 function OrderIndex() {
   return (
-    <Pane>
+    <Container>
       <Heading is="h1" size={900}>Hello Order Index!!</Heading>
       <List />
-    </Pane>
+    </Container>
   );
 }
 
