@@ -5,12 +5,21 @@ interface IOrderDocument extends mongoose.Document {
   age: number
 }
 
-const orderSchema = new mongoose.Schema({
-  name: String,
-  age: Number
-},{
+const schemaOptions = {
+  timestamps: { 
+    createdAt: 'created_at',
+    updatedAt: 'updated_at' 
+  },
   versionKey: false
-});
+};
+
+const orderSchema = new mongoose.Schema({
+  orderNumber:   String,
+  buyerPostCode: String,
+  buyerName:     String,
+  buyerAddress:  String,
+  total:         Number,
+}, schemaOptions);
 
 const Order = mongoose.model<IOrderDocument>('orders', orderSchema);
 export default Order;
