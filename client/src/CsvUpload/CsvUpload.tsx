@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components'
 import {useDropzone} from 'react-dropzone'
+import { Button, Heading, Textarea, Icon } from 'evergreen-ui';
 
 const Container = styled.div`
   color: black;
@@ -15,30 +16,12 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-  font-size: 1.0em;
-
-  &:disabled {
-    background: gray;
-    border: none;
-  }
-  ${props => props.primary && css`
-    background: palevioletred;
-    color: white;
-  `}
-`;
-
 const DropZone = styled.div`
   background: white;
   border-radius: 3px;
   border: 2px solid palevioletred;
   color: palevioletred;
+  text-align: center;
   font-size: 1.0em;
   height: 30vh;
   width: 50vw;
@@ -74,10 +57,9 @@ function UploadArea() {
         }
       </DropZone>
       <aside>
-        <h4>Files</h4>
         <ul>{files}</ul>
       </aside>
-      <Button primary onClick={handleClick}>実行</Button>
+      <Button primary onClick={handleClick}><Icon icon="cloud-upload" marginRight={16}/>アップロード</Button>
     </section>
   )
 }
