@@ -108,10 +108,10 @@ function List() {
   );
 }
 
-function OrderIndex() {
+function OrderIndex(props) {
   return (
     <Container>
-      <Heading is="h1" size={900}>Hello Order Index!!</Heading>
+      <Title>{props.title}</Title>
       <List />
     </Container>
   );

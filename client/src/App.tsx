@@ -9,14 +9,13 @@ import styled from 'styled-components'
 const Container = styled.div`
   margin-left: 160px; /* Same as the width of the sidenav */
 `
-
 function App() {
   return (
     <Container>
       <Router>
       <SideBar />
-        <Route path='/CsvUpload' component={CsvUpload} />
-        <Route path='/OrderIndex' component={OrderIndex} />
+        <Route path='/CsvUpload' render={() => <CsvUpload title="受注一括登録" />} />
+        <Route path='/OrderIndex' render={() => <OrderIndex title="受注伝票一覧" />} />
       </Router>
       <Footer />
     </Container>
