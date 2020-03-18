@@ -101,38 +101,11 @@ function upload(files: File[]) {
   })
 }
 
-function History() {
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>日付</th>
-          <th>内容</th>
-          <th>結果</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2020/02/20</td>
-          <td>csvアップロード</td>
-          <td>成功</td>
-        </tr>
-        <tr>
-          <td>2020/02/21</td>
-          <td>Not Found File</td>
-          <td>失敗</td>
-        </tr>
-      </tbody>
-    </table>
-  );
-}
-
-function CsvUpload() {
+function CsvUpload(props) {
   return (
     <Container>
-      <Title>CSVアップロード</Title>
+      <Title>{props.title}</Title>
       <UploadArea />
-      <History />
     </Container>
   );
 }
