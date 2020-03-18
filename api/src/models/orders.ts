@@ -14,6 +14,7 @@ const schemaOptions = {
 };
 
 const orderSchema = new mongoose.Schema({
+  mall:          String,
   orderNumber:   String,
   buyerPostCode: String,
   buyerName:     String,
