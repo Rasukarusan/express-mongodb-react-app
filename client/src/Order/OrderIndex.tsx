@@ -1,13 +1,5 @@
 import React, { useState, useEffect }  from 'react';
-import { 
-  Pane,
-  Heading,
-  Table,
-  Popover,
-  Position,
-  Menu,
-  TextDropdownButton
-} from 'evergreen-ui';
+import { Table, Popover, Position, Menu, TextDropdownButton } from 'evergreen-ui';
 import axios from 'axios';
 import { filter } from 'fuzzaldrin-plus'
 import styled from 'styled-components'
@@ -19,20 +11,26 @@ const Container = styled.div`
   margin-left: 10px;
 `;
 
-interface IOrder {
-  _id: string,
-  name: string,
-  age: number
-}
+const Title = styled.h1`
+  font-size: 1.5em;
+  color: palevioletred;
+`;
 
-function makeUpperFirstChar(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+interface IOrder {
+  _id:           string,
+  orderNumber:   string,
+  buyerPostCode: string,
+  buyerName:     string,
+  buyerAddress:  string,
+  total:         number,
+  created_at:     string,
+  updated_at:     string,
 }
 
 function List() {
   const [apiResponse, setApiResponse] = useState<IOrder[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [dropDownValue, setDropDownValue] = useState<string>('age');
+  const [dropDownValue, setDropDownValue] = useState<string>('_id');
 
   const getOrders = () => {
     axios.get<IOrder[]>('http://localhost:9000/orders')
@@ -58,24 +56,31 @@ function List() {
   const renderRow = (order: IOrder) => {
       return (
         <Table.Row key={order._id}>
-          <Table.TextCell>{ order.name }</Table.TextCell>
+          <Table.TextCell>{ order.orderNumber }</Table.TextCell>
           <Table.TextCell isNumber>{ order[dropDownValue] }</Table.TextCell>
+          <Table.TextCell>{ order.created_at }</Table.TextCell>
         </Table.Row>
       );
   }
 
+
   const renderValueHeaderCell = () => {
+
+    const dropDownOptions = [
+      { label: 'Id',             value: '_id' },
+      { label: '購入者郵便番号', value: 'buyerPostCode' },
+      { label: '購入者名',       value: 'buyerName' },
+      { label: '購入者住所',     value: 'buyerAddress' },
+      { label: '総合計',         value: 'total' },
+      { label: '伝票更新日',     value: 'updated_at' },
+    ];
+
     return (
       <Table.TextHeaderCell>
         <Popover position={Position.BOTTOM_LEFT} content={({ close }) => (
           <Menu>
             <Menu.OptionsGroup
-              title="Show"
-              options={[
-                { label: 'Age', value: 'age' },
-                { label: 'Name', value: 'name' },
-                { label: 'Id', value: '_id' },
-              ]}
+              options={ dropDownOptions }
               selected={ dropDownValue }
               onChange={value => {
                 setDropDownValue(value);
@@ -85,8 +90,8 @@ function List() {
           </Menu>
         )}
         >
-          <TextDropdownButton icon={ 'caret-down' } >
-            {makeUpperFirstChar(dropDownValue)}
+          <TextDropdownButton icon={ 'caret-down' } > 
+            { dropDownOptions.filter((option) => option.value === dropDownValue)[0]['label'] }
           </TextDropdownButton>
         </Popover>
       </Table.TextHeaderCell>
@@ -99,8 +104,9 @@ function List() {
         <Table.Head>
           <Table.SearchHeaderCell onChange={ value => setSearchQuery(value) } value={ searchQuery } />
           { renderValueHeaderCell() }
+          <Table.TextHeaderCell>受注日</Table.TextHeaderCell>
         </Table.Head>
-        <Table.VirtualBody height={200}>
+        <Table.VirtualBody height={500}>
           { filterTable(apiResponse).map((order) => renderRow(order)) }
         </Table.VirtualBody>
       </Table>
