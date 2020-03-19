@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   color: black;
-  width: 100vw;
+  width: 85vw;
   height:100vh;
   margin-left: 10px;
 `;

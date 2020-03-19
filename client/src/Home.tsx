@@ -20,10 +20,10 @@ const LogoSpin = keyframes`
 `
 
 const Logo = styled.img`
-  height: 50vmin;
+  height: 35vmin;
   pointer-events: none;
   animation: ${LogoSpin} infinite 20s linear;
-  margin-left: 150px;
+  margin-left: 100px;
 `
 
 const Title = styled.h1`
