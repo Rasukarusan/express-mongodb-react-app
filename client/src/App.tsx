@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import SideBar from './SideBar';
 import Footer from './Footer';
+import Home from './Home'
 import CsvUpload from './CsvUpload/CsvUpload';
 import OrderIndex from './Order/OrderIndex';
 import styled from 'styled-components'
@@ -14,6 +15,7 @@ function App() {
     <Container>
       <Router>
       <SideBar />
+        <Route exact path='/' render={() => <Home title="ピザ" />} />
         <Route path='/CsvUpload' render={() => <CsvUpload title="受注一括登録" />} />
         <Route path='/OrderIndex' render={() => <OrderIndex title="受注伝票一覧" />} />
       </Router>
