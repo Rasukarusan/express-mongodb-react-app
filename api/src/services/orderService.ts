@@ -1,4 +1,5 @@
 import Order from '../models/orders';
+let faker = require("faker/locale/ja")
 
 export default class OrderService {
 
@@ -23,10 +24,21 @@ export default class OrderService {
       console.log(file);
     });
     try {
-      return Order.insertMany([
-        { name: 'hoge', age: 11 },
-        { name: 'fooo', age: 12 },
-      ]);
+      let mocks = [];
+      let malls = ['amazon', 'rakuten', 'ebay', 'futureshop'];
+      for(let i = 0;i < 1000; ++i) {
+        let mall = malls[Math.floor(Math.random() * malls.length)];
+        let mock = {
+          mall: mall,
+          orderNumber: faker.finance.bitcoinAddress() ,
+          buyerPostCode: faker.address.zipCode(),
+          buyerName: faker.name.findName(),
+          buyerAddress: faker.address.state() + ' ' + faker.address.streetAddress(),
+          total: faker.commerce.price(),
+        };
+        mocks.push(mock);
+      }
+      return Order.insertMany(mocks);
     } catch (e) {
       throw e;
     }
