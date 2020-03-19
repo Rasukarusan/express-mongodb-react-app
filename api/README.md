@@ -1,3 +1,9 @@
+## Provision
+
+Create schema and collection.   
+schema -> `development`, `test`.  
+collection ->`orders`.
+
 ## Usage
 
 ### Endpoint
