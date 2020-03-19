@@ -53,10 +53,6 @@ function List(props: IListProps ) {
     });
   }
 
-  const onSelectOrder2 = (order: IOrder) => {
-    alert(order._id);
-  }
-
   const renderRow = (order: IOrder) => {
       return (
         <Table.Row key={order._id} isSelectable onSelect={() => props.onSelectRow(order)} >
